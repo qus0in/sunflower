@@ -38,7 +38,7 @@ promptForm.addEventListener('submit', async (event) => {
         promptDataQuestion.textContent = result.question;
         promptDataAnswer.textContent = result.answer;
         // 복사 관련
-        const pageUrl = 'https://qus0in.github.io/sunflower/';
+        const pageUrl = 'https://qus0in.github.io/sunflower';
         const shareLink = document.querySelector('#shareLink');
         shareLink.value = `${pageUrl}/history/?id=${result.id}`;
         const openLink = document.querySelector('#openLink');
