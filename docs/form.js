@@ -14,21 +14,23 @@ promptForm.addEventListener('submit', async (event) => {
     const submitButton = document.querySelector('#promptForm button');
     submitButton.disabled = true;
     // 프롬프트 처리
-    const formData = new FormData(promptForm);
-    const response = await fetch('localhost:8080/api/prompt', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Content-Type': 'application/json'
+    try {
+        const response = await fetch('http://localhost:8080/api/prompt', {
+            method: 'POST',
+            // Fetch시 직렬화하세요...
+            body: JSON.stringify({ text: promptTextValue }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            alert('프롬프트 처리 중 오류가 발생했습니다.');
+            return;
         }
-    });
-    if (!response.ok) {
-        alert('프롬프트 처리 중 오류가 발생했습니다.');
+        const result = await response.json();
+        alert(JSON.stringify(result));
+    } finally {
+        // 다 끝나면
         submitButton.disabled = false;
-        return;
     }
-    const result = await response.json();
-    alert(JSON.stringify(result));
-    // 다 끝나면
-    submitButton.disabled = false;
 });
