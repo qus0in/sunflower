@@ -15,7 +15,8 @@ promptForm.addEventListener('submit', async (event) => {
     submitButton.disabled = true;
     // 프롬프트 처리
     try {
-        const response = await fetch('http://localhost:8080/api/prompt', {
+        const baseUrl = 'https://annoying-sunbae.onrender.com'; // 이걸 바꾸면 됩니다
+        const response = await fetch(`${baseUrl}/api/prompt`, {
             method: 'POST',
             // Fetch시 직렬화하세요...
             body: JSON.stringify({ text: promptTextValue }),
@@ -37,10 +38,11 @@ promptForm.addEventListener('submit', async (event) => {
         promptDataQuestion.textContent = result.question;
         promptDataAnswer.textContent = result.answer;
         // 복사 관련
+        const pageUrl = 'https://qus0in.github.io/sunflower/';
         const shareLink = document.querySelector('#shareLink');
-        shareLink.value = `http://${location.hostname}:5500/docs/history/?id=${result.id}`;
+        shareLink.value = `${pageUrl}/history/?id=${result.id}`;
         const openLink = document.querySelector('#openLink');
-        openLink.href = `http://${location.hostname}:5500/docs/history/?id=${result.id}`;
+        openLink.href = `${pageUrl}/history/?id=${result.id}`;
         const promptData = document.querySelector('#promptData');
         promptData.style.display = 'block';
     } finally {
