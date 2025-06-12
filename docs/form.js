@@ -38,10 +38,11 @@ promptForm.addEventListener('submit', async (event) => {
         promptDataAnswer.textContent = result.answer;
         // 복사 관련
         const shareLink = document.querySelector('#shareLink');
-        shareLink.value = `${location.href}history?id=${result.id}`;
+        shareLink.value = `http://${location.hostname}/docs/history/?id=${result.id}`;
         const openLink = document.querySelector('#openLink');
-        openLink.href = `${location.href}history?id=${result.id}`;
-
+        openLink.href = `http://${location.hostname}/docs/history/?id=${result.id}`;
+        const promptData = document.querySelector('#promptData');
+        promptData.style.display = 'block';
     } finally {
         // 다 끝나면
         submitButton.disabled = false;
